@@ -5,6 +5,7 @@ public class ShipControl : MonoBehaviour {
 
 	public KeyCode keyCodeLeft;
 	public KeyCode keyCodeRight;
+	public KeyCode keyCodeRemove;
 
 	public ThrustControl tcLeft;
 	public ThrustControl tcRight;
@@ -21,6 +22,11 @@ public class ShipControl : MonoBehaviour {
 	}
 
 	void Update() {
+		// Remove ship from game
+		if (Input.GetKey(keyCodeRemove) && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))) {
+			Destroy(gameObject);
+		}
+
 		float thrustLeft = 0f;
 		float thrustRight = 0f;
 
