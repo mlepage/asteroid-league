@@ -11,22 +11,33 @@ public class ShipControl : MonoBehaviour {
 
 	public float speed;
 
+	Rigidbody rigidBody;
+
+	void Start() {
+		rigidBody = GetComponent<Rigidbody>();
+	}
+
 	void Update() {
 		float thrustLeft = 0f;
 		float thrustRight = 0f;
 
 		if (Input.GetKey(keyCodeLeft) && Input.GetKey(keyCodeRight)) {
-			GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * speed);
+			// Go forward and stop turning
+			rigidBody.AddRelativeForce(Vector3.forward * speed);
+			rigidBody.angularVelocity = Vector3.zero;
 			thrustLeft = 1f;
 			thrustRight = 1f;
 		} else if (Input.GetKey(keyCodeLeft)) {
-			GetComponent<Rigidbody>().AddTorque(Vector3.up * -speed);
+			// Turn left
+			rigidBody.AddTorque(Vector3.up * -speed);
 			thrustRight = 1f;
 		} else if (Input.GetKey(keyCodeRight)) {
-			GetComponent<Rigidbody>().AddTorque(Vector3.up * speed);
+			// Turn right
+			rigidBody.AddTorque(Vector3.up * speed);
 			thrustLeft = 1f;
 		}
 
+		// Update thrust visuals
 		tcLeft.UpdateThrust(thrustLeft);
 		tcRight.UpdateThrust(thrustRight);
 	}
