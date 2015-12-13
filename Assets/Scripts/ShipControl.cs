@@ -13,8 +13,11 @@ public class ShipControl : MonoBehaviour {
 
 	Rigidbody rigidBody;
 
+	AudioSource audioSource;
+
 	void Start() {
 		rigidBody = GetComponent<Rigidbody>();
+		audioSource = GetComponent<AudioSource>();
 	}
 
 	void Update() {
@@ -40,5 +43,17 @@ public class ShipControl : MonoBehaviour {
 		// Update thrust visuals
 		tcLeft.UpdateThrust(thrustLeft);
 		tcRight.UpdateThrust(thrustRight);
+
+		// Update thrust audio
+		if (thrustLeft != 0f || thrustRight != 0f) {
+			if (!audioSource.isPlaying) {
+				audioSource.Play();
+			}
+			audioSource.volume = (thrustLeft + thrustRight) / 2f;
+		} else {
+			if (audioSource.isPlaying) {
+				audioSource.Stop();
+			}
+		}
 	}
 }
