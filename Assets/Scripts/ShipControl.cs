@@ -3,6 +3,9 @@ using System.Collections;
 
 public class ShipControl : MonoBehaviour {
 
+	public KeyCode keyCodeLeft;
+	public KeyCode keyCodeRight;
+
 	public ThrustControl tcLeft;
 	public ThrustControl tcRight;
 
@@ -12,14 +15,14 @@ public class ShipControl : MonoBehaviour {
 		float thrustLeft = 0f;
 		float thrustRight = 0f;
 
-		if (Input.GetKey(KeyCode.Q) && Input.GetKey(KeyCode.W)) {
+		if (Input.GetKey(keyCodeLeft) && Input.GetKey(keyCodeRight)) {
 			GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * speed);
 			thrustLeft = 1f;
 			thrustRight = 1f;
-		} else if (Input.GetKey(KeyCode.Q)) {
+		} else if (Input.GetKey(keyCodeLeft)) {
 			GetComponent<Rigidbody>().AddTorque(Vector3.up * -speed);
 			thrustRight = 1f;
-		} else if (Input.GetKey(KeyCode.W)) {
+		} else if (Input.GetKey(keyCodeRight)) {
 			GetComponent<Rigidbody>().AddTorque(Vector3.up * speed);
 			thrustLeft = 1f;
 		}
