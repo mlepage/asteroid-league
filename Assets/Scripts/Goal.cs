@@ -21,11 +21,11 @@ public class Goal : MonoBehaviour {
 		asteroid.transform.position = Vector3.zero;
 
 		// Play goal sound
-		AudioSource audioSource = GetComponent<AudioSource>();
-		audioSource.PlayOneShot(audioSource.clip);
+		AudioSource audio = GetComponent<AudioSource>();
+		audio.PlayOneShot(audio.clip);
 
 		// Play crowd cheer sound
-		audioSource = GameObject.Find("Crowd").GetComponent<AudioSource>();
-		audioSource.PlayOneShot(audioSource.clip);
+		//audio = GameObject.Find("Crowd").GetComponent<AudioSource>();
+		//audio.PlayOneShot(audio.clip);
 	}
 }
