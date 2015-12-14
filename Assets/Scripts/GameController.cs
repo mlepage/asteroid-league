@@ -8,6 +8,9 @@ public class GameController : MonoBehaviour {
 	public GameObject ship3;
 	public GameObject ship4;
 
+	public AudioClip[] kickClips;
+	public AudioClip[] bounceClips;
+
 	void Update() {
 		// Shift + 1 (or 2 to 4) toggles whether each ship is active
 		if ((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))) {
@@ -24,5 +27,9 @@ public class GameController : MonoBehaviour {
 				ship4.SetActive(!ship4.activeSelf);
 			}
 		}
+	}
+
+	public void PlayRandomSound(AudioSource audio, AudioClip[] clips) {
+		audio.PlayOneShot(clips[Random.Range(0, clips.Length)]);
 	}
 }
